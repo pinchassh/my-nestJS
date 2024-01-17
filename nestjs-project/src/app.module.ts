@@ -6,13 +6,17 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { RedisOptions } from './configs/redis.options';
 import { CacheModule } from '@nestjs/cache-manager';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
+import { ApolloServerModule } from './graphql/apolloServer.module';
+import { ZmanimModule } from './zmanim/zmanim.moduls';
+
 
 
 @Module({
   imports: [
     CacheModule.registerAsync(RedisOptions),
-
+    ApolloServerModule,
     UsersModule,
+    ZmanimModule,
     // MongooseModule.forRoot('mongodb://localhost:27017/ZmanimApplication'),
     MongooseModule.forRoot(process.env.MONGODB_URI || 'mongodb://localhost:27017/ZmanimApplication', {
       connectionFactory: (connection) => {

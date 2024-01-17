@@ -17,11 +17,11 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { RegisterUserDto } from './dto/register-user.dto';
-import { UpdateUserDto } from './dto/update-user-info.dto';
+// import { UpdateUserDto } from './dto/update-user-info.dto';
 import { UsersService } from './users.service';
-import { AdminGuard } from 'src/auth/guards/admin/admin.guard';
+import { AdminGuard } from '../auth/guards/admin/admin.guard';
 import { LoginDTO } from './dto/login.dto';
-import { LoginGuard } from 'src/auth/guards/login/login.guard';
+import { LoginGuard } from '../auth/guards/login/login.guard';
 import { UserPayloadInterface } from 'src/auth/interfaces/TokenInterface';
 import RegisterInterface from './interface/RegisterInterface';
 import { CacheInterceptor } from '@nestjs/cache-manager';
@@ -43,7 +43,6 @@ export class UsersController {
   @Get()
   @UseGuards(AdminGuard)
   @UseInterceptors(CacheInterceptor)
-
   async getUsers(): Promise<RegisterInterface[]> {
     try {
       const userFromDB: RegisterInterface[] = await this.usersService.getUsers();
@@ -104,6 +103,7 @@ export class UsersController {
   // }
 
   @Post('/login')
+  @UseInterceptors(CacheInterceptor)
   @UsePipes(ValidationPipe)
   async login(@Body(new ValidationPipe()) user: LoginDTO) {
     try {

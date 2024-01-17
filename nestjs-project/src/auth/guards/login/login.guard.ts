@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { verifyToken } from 'src/auth/helpers/jwt';
+import { verifyToken } from '../../../auth/helpers/jwt';
 import TokenInterface, { UserPayloadInterface } from 'src/auth/interfaces/TokenInterface';
 
 @Injectable()

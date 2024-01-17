@@ -1,0 +1,40 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ZmanimEntryType {
+  CivilDate: String
+  JewishDate: String
+  Day: String
+  ParshasHashavuaOrYomTov: String
+  Alos16: String
+  Alos72Minutes: String
+  misheyakir: String
+  sunrise: String
+  sofZmanShmaMGA: String
+  sofZmanShmaGRA: String
+  sofZmanTfilaMGA: String
+  sofZmanTfilaGRA: String
+  chatzos: String
+  minchaGedolaGRA: String
+  plag: String
+  candleLighting18Minutes: String
+  sunset: String
+  tzaisGeonim: String
+  tzais72: String
+  tzais16: String
+  _id: ID
+}
+
+type ZmanimType {
+  Jerusalem: [ZmanimEntryType!]
+  Tlv: [ZmanimEntryType!]
+  BeerSheva: [ZmanimEntryType!]
+  Zefat: [ZmanimEntryType!]
+  London: [ZmanimEntryType!]
+  BoroPark: [ZmanimEntryType!]
+}
+
+type Query {
+  allZmanim: [ZmanimType!]!
+}

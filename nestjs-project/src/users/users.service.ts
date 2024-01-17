@@ -4,9 +4,9 @@ import { Model } from 'mongoose';
 import RegisterInterface from './interface/RegisterInterface';
 import UserFromClientInterface from './interface/UserFromClientInterface';
 import LoginInterface from './interface/LoginInterface';
-import { generateAuthToken } from 'src/auth/helpers/jwt';
 import { comparePassword, generateUserPassword } from './helpers/bcrypt';
 import { RegisterUserDto } from './dto/register-user.dto';
+import { generateAuthToken } from '../auth/helpers/jwt';
 
 @Injectable()
 export class UsersService {
