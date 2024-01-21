@@ -8,6 +8,7 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { ApolloServerModule } from './graphql/apolloServer.module';
 import { ZmanimModule } from './zmanim/zmanim.moduls';
+import { bgGreen, bgYellow, green } from 'chalk';
 
 
 
@@ -17,11 +18,12 @@ import { ZmanimModule } from './zmanim/zmanim.moduls';
     ApolloServerModule,
     UsersModule,
     ZmanimModule,
+
     // MongooseModule.forRoot('mongodb://localhost:27017/ZmanimApplication'),
     MongooseModule.forRoot(process.env.MONGODB_URI || 'mongodb://localhost:27017/ZmanimApplication', {
       connectionFactory: (connection) => {
         connection.on('connected', () => {
-          console.log('connected to mongoDB! 🥳');
+          console.log(bgYellow('connected to mongoDB!'), '🥳');
         });
         connection._events.connected();
         return connection;

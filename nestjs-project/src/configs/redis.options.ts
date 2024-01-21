@@ -1,6 +1,7 @@
 import { CacheModuleAsyncOptions } from '@nestjs/cache-manager';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { redisStore } from 'cache-manager-redis-store';
+import { bgYellow } from 'chalk';
 
 const REDIS_PORT = 6379;
 export const RedisOptions: CacheModuleAsyncOptions = {
@@ -14,7 +15,7 @@ export const RedisOptions: CacheModuleAsyncOptions = {
         port: configService.get<number>(`${REDIS_PORT}`)!,
       },
     });
-    console.log('redis connected!!!');
+    if (store) console.log(bgYellow('redis connected!!!'), '🥳');
 
     return {
       store: () => store,

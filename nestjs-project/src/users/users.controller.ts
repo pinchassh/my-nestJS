@@ -54,9 +54,11 @@ export class UsersController {
   }
 
   @Get(':userId')
-  getUser(@Param('userId') userId: string) {
+  async getUser(@Param('userId') userId: string) {
     try {
-      return { userId };
+      const userFromDB: RegisterInterface = await this.usersService.getUser(userId);
+
+      return userFromDB;
     } catch (error) {
       throw new NotFoundException();
     }

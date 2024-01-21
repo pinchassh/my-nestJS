@@ -1,6 +1,6 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import { blue, red } from 'chalk';
+import { cyan, underline, yellow } from 'chalk';
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
@@ -8,14 +8,15 @@ export class LoggerMiddleware implements NestMiddleware {
 
     // Filter the ApolloServer connections requests
     if (req.body.operationName !== 'IntrospectionQuery') {
+
       // Request logging
-      console.log(blue(`${req.method} ${req.originalUrl}`));
+      console.log(cyan(`${req.method} ${req.originalUrl}`));
 
       // Log headers
-      console.log(blue('Headers:', req.headers));
+      console.log(cyan('Headers:', req.headers));
 
       // Log request body
-      console.log('Body:', req.body);
+      console.log(cyan('Body:', req.body));
 
       // Log timestamp
       console.log('Timestamp:', new Date().toISOString());
@@ -27,14 +28,15 @@ export class LoggerMiddleware implements NestMiddleware {
         const finishedAt = Date.now();
 
         const duration = finishedAt - startAt;
-        console.log(red([`${method} ${originalUrl} ${statusCode} - ${duration}ms`]));
+        console.log(yellow([`${method} ${originalUrl} ${statusCode} - ${duration}ms`]));
       });
       next();
 
       // Response logging
-      console.log(`Status: ${res.statusCode}`);
+      console.log(underline.green(`Status: ${res.statusCode}`));
 
       console.log('----------------------------------------------');
     }
+    else { next() }
   }
 }

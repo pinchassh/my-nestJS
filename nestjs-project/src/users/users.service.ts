@@ -25,9 +25,21 @@ export class UsersService {
       return Promise.reject(error);
     }
   }
+
   async getUsers() {
     try {
-      const usersFromMongoose = await this.userModule.find({});
+      const usersFromMongoose: RegisterInterface[] = await this.userModule.find({});
+      return usersFromMongoose;
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+
+  async getUser(userId: string) {
+    try {
+      const usersFromMongoose: RegisterInterface = await this.userModule.findOne({ _id: userId });
+      console.log('usersFromMongoose:', usersFromMongoose);
+
       return usersFromMongoose;
     } catch (error) {
       return Promise.reject(error);
